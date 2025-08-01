@@ -1,0 +1,16 @@
+open console
+cd to target directory
+create a file that lists filepaths to WAV-files that should be processed. separate with newline (\n). Name the file "files_wav.txt".
+
+initialize a npm project: npm init
+npm install https://github.com/OpenAcousticDevices/AudioMoth-Utils --save
+
+copy the file 'audiomoth_gps_sync_filelist.js' to your target dir
+edit the file and specify all Paths in lines 6-9:
+line 6 = input directory within working dir
+line 7 = output directory within working dir
+line 8 = filepath to the file that lists WAV-files that should be processed (see above, e.g. "files_wav.txt")
+line 9 = optionally rename the filename for a summary file.
+
+run the script via: node audiomoth_gps_sync_filelist.js
+
