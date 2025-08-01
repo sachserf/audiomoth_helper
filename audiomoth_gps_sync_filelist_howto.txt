@@ -14,3 +14,21 @@ line 9 = optionally rename the filename for a summary file.
 
 run the script via: node audiomoth_gps_sync_filelist.js
 
+####################################################
+
+### Troubleshooting
+# if not all files could be processed (for me, the maximum number of processed files was 16000). Run the script again with files that failed. Optionally use the following R-Script-template to write a new filelist, excluding already processed files. 
+
+library(tidyverse)
+x <- rio::import("Path/to/your/sync_summary.csv") %>% as_tibble() ###### specify
+x %>% count(Success, Error, Skipped)
+
+export <- x %>% 
+  filter(Success == "no") %>% 
+  select(File) %>% 
+  mutate(File = file.path("/add/directories/to/your/wav/files", File))  ###### specify
+
+writeLines(paste(export$File, sep = "\n"), con = "Path/to/your/working/dir/files_wav_update.txt") ###### specify
+
+
+
